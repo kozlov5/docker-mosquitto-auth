@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+  web:
+    build: .
+    depends_on:
+      - postgresql
+    volumes:
+      - /opt/logs:/opt/code/logs
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+  postgresql:
+    image: "postgres"
+    volumes:
+      - /opt/pgData:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: messenger
+      POSTGRES_PASSWORD: 13n2b#Pl#3r6
+      POSTGRES_DB: messenger
