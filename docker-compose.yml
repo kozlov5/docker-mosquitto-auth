@@ -9,8 +9,6 @@ services:
       - "9001:9001"
   postgresql:
     image: "postgres"
-    volumes:
-      - .:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
