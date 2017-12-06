@@ -1,9 +1,16 @@
 version: '2.1'
 services:
+  mqtt:
+    build: .
+    depends_on:
+      - postgresql
+    ports:
+      - "1883:1883"
+      - "9001:9001"
   postgresql:
     image: "postgres"
     volumes:
-      - /opt/pgData:/var/lib/postgresql/data
+      - .:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
