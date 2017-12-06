@@ -13,5 +13,5 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: mqtt
-      POSTGRES_PASSWORD: sbgW$Y#3r6
+      POSTGRES_PASSWORD: sbgNbgt2
       POSTGRES_DB: mqtt
