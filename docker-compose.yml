@@ -1,12 +1,5 @@
 version: '2.1'
 services:
-  mqtt:
-    build: .
-    depends_on:
-      - postgresql
-    ports:
-      - "1883:1883"
-      - "9001:9001"
   postgresql:
     image: "postgres"
     volumes:
