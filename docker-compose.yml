@@ -4,8 +4,6 @@ services:
     build: .
     depends_on:
       - postgresql
-    volumes:
-      - /opt/logs:/opt/code/logs
     ports:
       - "1883:1883"
       - "9001:9001"
