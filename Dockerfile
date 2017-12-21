@@ -29,7 +29,7 @@ VOLUME ["/mqtt/config", "/mqtt/data", "/mqtt/log"]
 ONBUILD ADD acl.conf /mqtt/config/acl/acl.conf
 ONBUILD ADD custom.conf /mqtt/config/conf.d/custom.conf
 
-EXPOSE 1885 9005
+EXPOSE 8883 9001
 
 ADD docker-entrypoint.sh /usr/bin/
 
