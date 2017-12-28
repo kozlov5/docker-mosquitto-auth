@@ -3,7 +3,7 @@ FROM ubuntu:latest
 MAINTAINER Kozlov Vladimir <voloda1992@gmail.com>
 
 COPY compile_config /tmp/compile_config
-COPY mosquitto-auth-plug-0.1.2.tar.gz /tmp/
+COPY mosquitto-auth-plug-0.1.2.tar.gz /tmp
 RUN apt-get update && apt-get install -y wget make postgresql libpq-dev libc-ares-dev libcurl4-openssl-dev uuid-dev libc6-dev libwebsockets-dev gcc build-essential g++ git && \
 	wget -q http://mosquitto.org/files/source/mosquitto-1.4.14.tar.gz -O /tmp/mosquitto-1.4.14.tar.gz && \
 	cd /tmp/ && \
@@ -14,13 +14,7 @@ RUN apt-get update && apt-get install -y wget make postgresql libpq-dev libc-are
 	make install && \
 	cd .. && \
 
-#	git clone https://github.com/jpmens/mosquitto-auth-plug.git && \
-    tar zxvf mosquitto-auth-plug-0.1.2.tar.gz  && \
-	cd mosquitto-auth-plug-0.1.2 && \
-	mv /tmp/compile_config/auth_config.mk ./config.mk && \
-	make && \
 	mkdir -p /mqtt/config /mqtt/data /mqtt/log && \
-	cp auth-plug.so /mqtt/config/ && \
     adduser --system --disabled-password --disabled-login mosquitto && \
     groupadd mosquitto && \
     usermod -g mosquitto mosquitto
