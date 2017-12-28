@@ -4,11 +4,11 @@ MAINTAINER Nicolas Duval <nicolas.duval@simplx.fr>
 
 COPY compile_config /tmp/compile_config
 RUN apt-get update && apt-get install -y wget make postgresql libpq-dev libc-ares-dev libcurl4-openssl-dev uuid-dev libc6-dev libwebsockets-dev gcc build-essential g++ git && \
-	wget -q http://mosquitto.org/files/source/mosquitto-1.4.9.tar.gz -O /tmp/mosquitto-1.4.9.tar.gz && \
+	wget -q http://mosquitto.org/files/source/mosquitto-1.4.14.tar.gz -O /tmp/mosquitto-1.4.14.tar.gz && \
 	cd /tmp/ && \
-	tar zxvf mosquitto-1.4.9.tar.gz && \ 
-	rm -f mosquitto-1.4.9.tar.gz && \
-	cd ./mosquitto-1.4.9 && \
+	tar zxvf mosquitto-1.4.14.tar.gz && \ 
+	rm -f mosquitto-1.4.14.tar.gz && \
+	cd ./mosquitto-1.4.14 && \
 	mv /tmp/compile_config/mqtt_config.mk ./config.mk && \ 
 	make install && \
 	cd .. && \
