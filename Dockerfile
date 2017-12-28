@@ -1,25 +1,28 @@
-FROM debian:jessie
+FROM ubuntu:latest
 
-MAINTAINER Nicolas Duval <nicolas.duval@simplx.fr>
+MAINTAINER Kozlov Vladimir <voloda1992@gmail.com>
 
 COPY compile_config /tmp/compile_config
+COPY mosquitto-auth-plug-0.1.2.tar.gz /tmp/
 RUN apt-get update && apt-get install -y wget make postgresql libpq-dev libc-ares-dev libcurl4-openssl-dev uuid-dev libc6-dev libwebsockets-dev gcc build-essential g++ git && \
 	wget -q http://mosquitto.org/files/source/mosquitto-1.4.14.tar.gz -O /tmp/mosquitto-1.4.14.tar.gz && \
 	cd /tmp/ && \
-	tar zxvf mosquitto-1.4.14.tar.gz && \ 
+	tar zxvf mosquitto-1.4.14.tar.gz && \
 	rm -f mosquitto-1.4.14.tar.gz && \
 	cd ./mosquitto-1.4.14 && \
-	mv /tmp/compile_config/mqtt_config.mk ./config.mk && \ 
+	mv /tmp/compile_config/mqtt_config.mk ./config.mk && \
 	make install && \
 	cd .. && \
-	git clone https://github.com/jpmens/mosquitto-auth-plug.git && \
-	cd mosquitto-auth-plug && \
+
+#	git clone https://github.com/jpmens/mosquitto-auth-plug.git && \
+    tar zxvf mosquitto-auth-plug-0.1.2.tar.gz  && \
+	cd mosquitto-auth-plug-0.1.2 && \
 	mv /tmp/compile_config/auth_config.mk ./config.mk && \
 	make && \
 	mkdir -p /mqtt/config /mqtt/data /mqtt/log && \
 	cp auth-plug.so /mqtt/config/ && \
     adduser --system --disabled-password --disabled-login mosquitto && \
-    groupadd mosquitto && \ 
+    groupadd mosquitto && \
     usermod -g mosquitto mosquitto
 
 COPY config /mqtt/config
@@ -34,4 +37,4 @@ EXPOSE 8883 9001
 ADD docker-entrypoint.sh /usr/bin/
 
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
-CMD ["/usr/local/sbin/mosquitto", "-c", "/mqtt/config/mosquitto.conf"]
+#CMD ["/usr/local/sbin/mosquitto", "-c", "/mqtt/config/mosquitto.conf"]
