@@ -4,7 +4,7 @@ MAINTAINER Kozlov Vladimir <voloda1992@gmail.com>
 
 COPY compile_config /tmp/compile_config
 COPY mosquitto-auth-plug-0.1.2.tar.gz /tmp
-RUN apt-get update && apt-get install -y wget make libc-ares-dev libcurl4-openssl-dev uuid-dev libc6-dev libwebsockets-dev gcc build-essential g++ git && \
+RUN apt-get update && apt-get install -y wget make postgresql libpq-dev libc-ares-dev libcurl4-openssl-dev uuid-dev libc6-dev libwebsockets-dev gcc build-essential g++ git && \
 	wget -q http://mosquitto.org/files/source/mosquitto-1.4.14.tar.gz -O /tmp/mosquitto-1.4.14.tar.gz && \
 	cd /tmp/ && \
 	tar zxvf mosquitto-1.4.14.tar.gz && \
