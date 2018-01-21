@@ -4,11 +4,11 @@ MAINTAINER Kozlov Vladimir <voloda1992@gmail.com>
 
 COPY compile_config /tmp/compile_config
 RUN apt-get update && apt-get install -y wget make postgresql libpq-dev libc-ares-dev libcurl4-openssl-dev uuid-dev libc6-dev libwebsockets-dev gcc build-essential g++ git && \
-	wget -q http://mosquitto.org/files/source/mosquitto-1.4.12.tar.gz -O /tmp/mosquitto-1.4.12.tar.gz && \
+	wget -q http://mosquitto.org/files/source/mosquitto-1.4.14.tar.gz -O /tmp/mosquitto-1.4.14.tar.gz && \
 	cd /tmp/ && \
-	tar zxvf mosquitto-1.4.12.tar.gz && \
-	rm -f mosquitto-1.4.12.tar.gz && \
-	cd ./mosquitto-1.4.12 && \
+	tar zxvf mosquitto-1.4.14.tar.gz && \
+	rm -f mosquitto-1.4.14.tar.gz && \
+	cd ./mosquitto-1.4.14 && \
 	mv /tmp/compile_config/mqtt_config.mk ./config.mk && \
 	make install && \
 	cd .. && \
@@ -29,7 +29,7 @@ VOLUME ["/mqtt/config", "/mqtt/data", "/mqtt/log"]
 ONBUILD ADD acl.conf /mqtt/config/acl/acl.conf
 ONBUILD ADD custom.conf /mqtt/config/conf.d/custom.conf
 
-EXPOSE 8883 9001
+EXPOSE 1883 9001
 
 ADD docker-entrypoint.sh /usr/bin/
 
